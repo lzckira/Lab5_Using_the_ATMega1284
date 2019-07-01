@@ -10,12 +10,12 @@ AVR_MCU(F_CPU,"atmega1284");
 AVR_MCU_VCD_FILE("build/results/Lab5_Using_the_ATMega1284_trace.vcd",1000);
 
 const struct avr_mmcu_vcd_trace_t _mytrace[] _MMCU_ = {
-    { AVR_MCU_VCD_SYMBOL("PINA0"), .mask = 1 << 0,.what = (void*)&PINA, } , // Example individual pin
+//    { AVR_MCU_VCD_SYMBOL("PINA0"), .mask = 1 << 0,.what = (void*)&PINA, } , // Example individual pin
     { AVR_MCU_VCD_SYMBOL("PORTB"), .what = (void*)&PORTB, } , // Example full port
 };
 
 /* Function to output through UART */
-static int uart_putchar(char c, FILE *stream) {
+/*static int uart_putchar(char c, FILE *stream) {
     if (c == '\n') {
         uart_putchar('\r',stream);
     }
@@ -23,7 +23,7 @@ static int uart_putchar(char c, FILE *stream) {
     UDR0 = c;
     return 0;
 }
-
+*/
 /* Setup filestream for debugging */
-FILE mystdout = FDEV_SETUP_STREAM(uart_putchar,NULL,_FDEV_SETUP_WRITE);
+//FILE mystdout = FDEV_SETUP_STREAM(uart_putchar,NULL,_FDEV_SETUP_WRITE);
 /* End SimAVR section */
