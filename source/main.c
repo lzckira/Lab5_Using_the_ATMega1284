@@ -1,7 +1,7 @@
 /*	Author: zlian030
  *  Partner(s) Name: 
  *	Lab Section:
- *	Assignment: Lab #5  Exercise #2
+ *	Assignment: Lab #5  Exercise #3
  *	Exercise Description: [optional - include for your own benefit]
  *
  *	I acknowledge all content contained herein, excluding template or example
@@ -14,7 +14,9 @@
 #endif
 
 enum States {start, ADD, ADDwait, SUB, SUBwait, wait, reset} state;
-unsigned char temp = 0x01;
+unsigned char order = 0x01;
+unsigned char cont = 0x00;
+
 void Tick();
 
 int main(void) {
@@ -34,64 +36,16 @@ void Tick() {
 	case start:
 	    state = waitRelease;
 	    break;
-        case seq1:
+	case press:
 	    if (PINA == 0x01) {
-		temp = 0x02;
-                state = waitRelease;
-	    }
-            break;
-	case seq2:
-	    if (PINA == 0x01) {
-		temp = 0x03;
-                state = waitRelease;
+	        state = waitRelease;
+	        cont = cont + 0x01;
 	    }
 	    break;
-	case seq3;
-	    if (PINA == 0x01) {
-		temp = 0x04;
-                state = waitRelease;
-	    }
-	    break;
-        case seq4:
-            if (PINA == 0x01) {
-                temp = 0x05;
-                state = waitRelease;
-            }
-            break;
-        case seq5:
-            if (PINA == 0x01) {
-                temp = 0x06;
-                state = waitRelease;
-            }
-            break;
-        case seq6:
-            if (PINA == 0x01) {
-                temp = 0x01;
-		state = waitRelease;
-            }
-            break;
-
-
+	
 	case waitRelease:
 	    if (PINA == 0x00) {
-		if (temp == 0x01) {
-		    state = seq1;
-		}
-                else if (temp == 0x02) {
-                    state = seq2;
-                }
-                else if (temp == 0x03) {
-                    state = seq3;
-                }
-                else if (temp == 0x04) {
-                    state = seq4;
-                }
-                else if (temp == 0x05) {
-                    state = seq5;
-                }
-		else {
-		    state = seq6;
-		}
+		state = press;
 	    }
 	    break;
         default:
@@ -102,25 +56,35 @@ void Tick() {
     switch (state) {
 	case start:
 	    break;
-        case seq1:
-	    PORTB = 0x03;
-	    break;
-        case seq2:
-            PORTB = 0x06;
+        case press:
+	    if (cont == 0x00) {
+		    
+	    }
+	    else if (cont == 0x01) {
+	    
+	    }
+	    else if (cont == 0x02) {
+	    
+	    }
+            else if (cont == 0x03) {
+	    
+	    }
+            else if (cont == 0x04) {
+	    
+	    }
+            else if (cont == 0x05) {
+	    
+	    }
+            else if (cont == 0x06) {
+	    
+	    }
+	    break;    
+        case waitRelease:
+		    
             break;
-        case seq3:
-            PORTB = 0x0C;
+        default:
+	    state = waitRelease;
             break;
-        case seq4:
-            PORTB = 0x18;
-            break;
-        case seq5:
-            PORTB = 0x30;
-            break;
-        case seq6:
-            PORTB = 0x60;
-            break;
-
 
 
     } 
