@@ -37,7 +37,7 @@ void Tick() {
 	    state = waitRelease;
 	    break;
 	case press:
-	    if (~PINA == 0x00) {
+	    if (~PINA == 0x01) {
 	        state = waitRelease;
 	        cont = cont + 0x01;
 	    }
@@ -71,19 +71,19 @@ void Tick() {
 	    
 	    }
 	    else if (cont == 0x02) {
-                 PORTC = 0x04;
+                 PORTC = 0x03;
 	    
 	    }
             else if (cont == 0x03) {
-                 PORTC = 0x08;
+                 PORTC = 0x04;
 	    
 	    }
             else if (cont == 0x04) {
-                 PORTC = 0x10;
+                 PORTC = 0x05;
 	    
 	    }
             else if (cont == 0x05) {
-                 PORTC = 0x20;
+                 PORTC = 0x06;
 	    
 	    }
             else {
