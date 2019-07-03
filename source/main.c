@@ -1,12 +1,12 @@
 /*	Author: zlian030
- *  Partner(s) Name: 
- *	Lab Section:
- *	Assignment: Lab #5  Exercise #3
- *	Exercise Description: [optional - include for your own benefit]
- *
- *	I acknowledge all content contained herein, excluding template or example
- *	code, is my own original work.
- */
+*       Partner(s) Name: 
+*	Lab Section:
+*	Assignment: Lab #5  Exercise #3
+*	Exercise Description: [optional - include for your own benefit]
+*
+*	I acknowledge all content contained herein, excluding template or example
+*	code, is my own original work.
+*/
 #include <avr/io.h>
 
 #ifdef _SIMULATE_
@@ -58,19 +58,16 @@ void Tick() {
             }
             break;
         case wait:
-            if ((~PINA & 0X01) && (~temp2)) {
+            if ((~PINA & 0X01) && (temp2 == 0x00)) {
                 state = left;
             }
-	    else if ((~PINA & 0x01)  && (temp2)) {
+	    else if ((~PINA & 0x01)  && (temp2 == 0x01)) {
                 state = right;
             }
 	    else {
 		state = wait;
 	    } 
             break;
-	case reset:
-	    state = wait;
-	    break;
 	default:
 	    state = wait;
 	    break;
@@ -81,8 +78,8 @@ void Tick() {
             break;
         case left:
             temp = temp + 0x01;
-	    if (temp == 5) {
-		    temp2 = 1;
+	    if (temp == 0x05) {
+		    temp2 = 0x01;
 	    }
             break;
 	case leftWait:
@@ -90,8 +87,8 @@ void Tick() {
         case right:
 	    temp = temp - 0x01;
 
-	    if (temp == 0) {
-		    temp2 = 0;
+	    if (temp == 0x00) {
+		    temp2 = 0x00;
 	    }
             break;
 	case rightWait:

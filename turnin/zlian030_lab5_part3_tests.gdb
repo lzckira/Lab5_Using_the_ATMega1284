@@ -26,7 +26,7 @@
 echo ======================================================\n
 echo Running all tests..."\n\n
 
-test “everything - A0 to A6 to A0 to A3”
+test "everything - A0 to A6 to A0 to A6 to A1"
 setPINA 0xFF
 continue 5
 expectPORTC 0x01
@@ -54,18 +54,6 @@ expectPORTC 0x10
 setPINA 0xFF
 continue 5
 expectPORTC 0x10
-setPINA 0xFE
-continue 5
-expectPORTC 0x20
-setPINA 0xFF
-continue 5
-expectPORTC 0x20
-setPINA 0xFE
-continue 5
-expectPORTC 0x40
-setPINA 0xFF
-continue 5
-expectPORTC 0x40
 setPINA 0xFE
 continue 5
 expectPORTC 0x20
@@ -114,6 +102,18 @@ expectPORTC 0x04
 setPINA 0xFF
 continue 5
 expectPORTC 0x04
+setPINA 0xFE
+continue 5
+expectPORTC 0x08
+setPINA 0xFF
+continue 5
+expectPORTC 0x08
+setPINA 0xFE
+continue 5
+expectPORTC 0x10
+setPINA 0xFF
+continue 5
+expectPORTC 0x10
 
 checkResult
 
