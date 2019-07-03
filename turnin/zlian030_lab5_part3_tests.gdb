@@ -26,101 +26,97 @@
 echo ======================================================\n
 echo Running all tests..."\n\n
 
-test “PINA: 0xFF => PORTC: 0x40”
+test “everything - A0 to A6 to A0 to A3”
+setPINA 0xFF
+continue 5
+expectPORTC 0x01
+setPINA 0xFE
+continue 5
+expectPORTC 0x02
+setPINA 0xFF
+continue 5
+expectPORTC 0x02
+setPINA 0xFE
+continue 5
+expectPORTC 0x04
+setPINA 0xFF
+continue 5
+expectPORTC 0x04
+setPINA 0xFE
+continue 5
+expectPORTC 0x08
+setPINA 0xFF
+continue 5
+expectPORTC 0x08
+setPINA 0xFE
+continue 5
+expectPORTC 0x10
+setPINA 0xFF
+continue 5
+expectPORTC 0x10
+setPINA 0xFE
+continue 5
+expectPORTC 0x20
+setPINA 0xFF
+continue 5
+expectPORTC 0x20
+setPINA 0xFE
+continue 5
+expectPORTC 0x40
 setPINA 0xFF
 continue 5
 expectPORTC 0x40
-checkResult
-
-test “PINA: 0xFE => PORTC: 0x60”
 setPINA 0xFE
 continue 5
-expectPORTC 0x60
+expectPORTC 0x20
+setPINA 0xFF
+continue 5
+expectPORTC 0x20
+setPINA 0xFE
+continue 5
+expectPORTC 0x10
+setPINA 0xFF
+continue 5
+expectPORTC 0x10
+setPINA 0xFE
+continue 5
+expectPORTC 0x08
+setPINA 0xFF
+continue 5
+expectPORTC 0x08
+setPINA 0xFE
+continue 5
+expectPORTC 0x04
+setPINA 0xFF
+continue 5
+expectPORTC 0x04
+setPINA 0xFE
+continue 5
+expectPORTC 0x02
+setPINA 0xFF
+continue 5
+expectPORTC 0x02
+setPINA 0xFE
+continue 5
+expectPORTC 0x01
+setPINA 0xFF
+continue 5
+expectPORTC 0x01
+setPINA 0xFE
+continue 5
+expectPORTC 0x02
+setPINA 0xFF
+continue 5
+expectPORTC 0x02
+setPINA 0xFE
+continue 5
+expectPORTC 0x04
+setPINA 0xFF
+continue 5
+expectPORTC 0x04
+
 checkResult
 
-test “PINA: 0xFD => PORTC: 0x60”
-setPINA 0xFD
-continue 5
-expectPORTC 0x60
-checkResult
-
-test “PINA: 0xFC => PORTC: 0x70”
-setPINA 0xFC
-continue 5
-expectPORTC 0x70
-checkResult
-
-test “PINA: 0xFB => PORTC: 0x70”
-setPINA 0xFB
-continue 5
-expectPORTC 0x70
-checkResult
-
-test “PINA: 0xFA => PORTC: 0x38”
-setPINA 0xFA
-continue 5
-expectPORTC 0x38
-checkResult
-
-test “PINA: 0xF9 => PORTC: 0x38”
-setPINA 0xF9
-continue 5
-expectPORTC 0x38
-checkResult
-
-test “PINA: 0xF8 => PORTC: 0x3C”
-setPINA 0xF8
-continue 5
-expectPORTC 0x3C
-checkResult
-
-test “PINA: 0xF7 => PORTC: 0x3C”
-setPINA 0xF7
-continue 5
-expectPORTC 0x3C
-checkResult
-
-test “PINA: 0xF6 => PORTC: 0x3C”
-setPINA 0xF6
-continue 5
-expectPORTC 0x3C
-checkResult
-
-test “PINA: 0xF5 => PORTC: 0x3E”
-setPINA 0xF5
-continue 5
-expectPORTC 0x3E
-checkResult
-
-test “PINA: 0xF4 => PORTC: 0x3E”
-setPINA 0xF4
-continue 5
-expectPORTC 0x3E
-checkResult
-
-test “PINA: 0xF3 => PORTC: 0x3E”
-setPINA 0xF3
-continue 5
-expectPORTC 0x3E
-checkResult
-
-test “PINA: 0xF2 => PORTC: 0x3F”
-setPINA 0xF2
-continue 5
-expectPORTC 0x3F
-checkResult
-
-test “PINA: 0xF1 => PORTC: 0x3F”
-setPINA 0xF1
-continue 5
-expectPORTC 0x3F
-checkResult
-
-test “PINA: 0xF0 => PORTC: 0x3F”
-setPINA 0xF0
-continue 5
-expectPORTC 0x3F
-checkResult
 
 # Add tests below
 
