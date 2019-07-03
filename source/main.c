@@ -1,21 +1,20 @@
 /*	Author: zlian030
 *       Partner(s) Name: 
 *	Lab Section:
-*	Assignment: Lab #5  Exercise #3
+*	Assignment: Lab #6  Exercise #1
 *	Exercise Description: [optional - include for your own benefit]
 *
 *	I acknowledge all content contained herein, excluding template or example
 *	code, is my own original work.
 */
 #include <avr/io.h>
-
 #ifdef _SIMULATE_
 #include "simAVRHeader.h"
 #endif
 
-enum States {start, left, leftWait, right, rightWait, wait} state;
-unsigned char temp = 0x00;
-unsigned char temp2 = 0x00;
+enum States {start, LED1, LED2, LED3} state;
+/*unsigned char temp = 0x00;
+unsigned char temp2 = 0x00;*/
 void Tick();
 
 int main(void) {
@@ -33,71 +32,17 @@ DDRC = 0xFF; PORTC = 0x00; // Configure port C's 8 pins as outputs, initialize t
 void Tick() {
     switch(state) {
 	case start:
-	    state = wait;
+	    state = LED1;
 	    break;
-	case left:
-	    state = leftWait;
+	case LED1:
+	    state = LED2;
 	    break;
-	case leftWait:
-	    if (!(~PINA & 0x01)) {
-		state = wait;
-	    }
-	    else {
-		state = leftWait;
-	    }
+	case LED2:
+	    state = LED3;
 	    break;
-	case right:
-	    state = rightWait;
+	case LED3:
+	    state = LED1;
 	    break;
-	case rightWait:
-	    if (!(~PINA & 0x01)){
-		state = wait;
-	    }
-            else {
-                state = rightWait;
-            }
-            break;
-        case wait:
-            if ((~PINA & 0X01) && (temp2 == 0x00)) {
-                state = left;
-            }
-	    else if ((~PINA & 0x01)  && (temp2 == 0x01)) {
-                state = right;
-            }
-	    else {
-		state = wait;
-	    } 
-            break;
-	default:
-	    state = wait;
-	    break;
-    }
-
-    switch(state) {
-        case start:
-            break;
-        case left:
-            temp = temp + 0x01;
-	    if (temp == 0x05) {
-		    temp2 = 0x01;
-	    }
-            break;
-	case leftWait:
-	    break;
-        case right:
-	    temp = temp - 0x01;
-
-	    if (temp == 0x00) {
-		    temp2 = 0x00;
-	    }
-            break;
-	case rightWait:
-	    break;
-        case wait:
-            break;
-        default:
-            break;
-    }
-    
-    PORTC = 0x01 << temp;    
+		    
+		    
 }
