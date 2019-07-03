@@ -13,7 +13,7 @@
 #include "simAVRHeader.h"
 #endif
 
-enum States {start, ADD, ADDwait, SUB, SUBwait, wait, reset} state;
+enum States {start, left, leftWait, right, rightWait, wait} state;
 unsigned char temp = 0x00;
 unsigned char temp2 = 0x00;
 void Tick();
@@ -35,34 +35,34 @@ void Tick() {
 	case start:
 	    state = wait;
 	    break;
-	case ADD:
-	    state = ADDwait;
+	case left:
+	    state = leftWait;
 	    break;
-	case ADDwait:
+	case leftWait:
 	    if (!(~PINA & 0x01)) {
 		state = wait;
 	    }
 	    else {
-		state = ADDwait;
+		state = leftWait;
 	    }
 	    break;
-	case SUB:
-	    state = SUBwait;
+	case right:
+	    state = rightWait;
 	    break;
-	case SUBwait:
+	case rightWait:
 	    if (!(~PINA & 0x01)){
 		state = wait;
 	    }
             else {
-                state = SUBwait;
+                state = rightWait;
             }
             break;
         case wait:
             if ((~PINA & 0X01) && (~temp2)) {
-                state = ADD;
+                state = left;
             }
 	    else if ((~PINA & 0x01)  && (temp2)) {
-                state = SUB;
+                state = right;
             }
 	    else {
 		state = wait;
@@ -79,24 +79,25 @@ void Tick() {
     switch(state) {
         case start:
             break;
-        case ADD:
+        case left:
             temp = temp + 0x01;
-if (temp == 7) {temp2 = 1;}
+	    if (temp == 5) {
+		    temp2 = 1;
+	    }
             break;
-	case ADDwait:
+	case leftWait:
 	    break;
-        case SUB:
+        case right:
 	    temp = temp - 0x01;
 
-if (temp == 0) {temp2 = 0;}
+	    if (temp == 0) {
+		    temp2 = 0;
+	    }
             break;
-	case SUBwait:
+	case rightWait:
 	    break;
         case wait:
             break;
-	case reset:
-//	    temp = 0x00;
-	    break;
         default:
             break;
     }
